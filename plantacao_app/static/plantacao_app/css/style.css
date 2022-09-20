@@ -1,26 +1,61 @@
 
 :root{
     --cor_fundo: #DAD7CD;
-    --cor_div_principal: #1FAB89;
-    --cor_div_clara: #62D2A2;
+    --cor_principal: #1FAB89;
+    --cor_div_clara: #EEF2E6;
     --cor_div_mais_clara: #9DF3C4;
+    --cor_bordas: rgb(150, 150, 150);
+    --fonte: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 
 
 body{
     background-color: var(--cor_fundo);
+    margin: 0;
 }
 
+footer {
+    z-index: 5;
+    background-color: var(--cor_principal);
+    position: absolute !important;
+    width: 100%;
+    height: fit-content;
+    bottom: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex: 0;
+  }
+
 .main{
-    background-color: var(--cor_div_clara);
-    border: 1px solid black;
-    border-top: none;
+    border: 1px solid var(--cor_bordas);
+    border-radius: 10px;
+    background-color: #1FAB89;
     position: absolute;
     top: 0; bottom: 0;
     left: 0; right: 0;
     margin: auto;
-    padding: 0;
-    width: 85%;
-    height: 100%;
+    height: 60%;
+    width: 80%;
 }
+
+
+.menu {
+    background-color: var(--cor_principal) !important;
+    box-shadow: 0 0 1vh black !important;
+    color: white;
+    border-bottom: 0.2vh solid #ffffff !important;
+    position: fixed !important;
+    width: 100%;
+    z-index: 4;
+  }
+
+  .foot{
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    text-align: center;
+    font-family: var(--fonte);
+    font-size: 14px;
+    padding: 0 !important;
+    margin: 0.5vh !important;
+  }
