@@ -55,7 +55,7 @@ ROOT_URLCONF = 'plantacao_iot.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['plantacao_app/templates/plantacao_app'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
