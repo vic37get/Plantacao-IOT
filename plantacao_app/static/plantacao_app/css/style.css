@@ -1,0 +1,26 @@
+
+:root{
+    --cor_fundo: #DAD7CD;
+    --cor_div_principal: #1FAB89;
+    --cor_div_clara: #62D2A2;
+    --cor_div_mais_clara: #9DF3C4;
+}
+
+
+
+body{
+    background-color: var(--cor_fundo);
+}
+
+.main{
+    background-color: var(--cor_div_clara);
+    border: 1px solid black;
+    border-top: none;
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    margin: auto;
+    padding: 0;
+    width: 85%;
+    height: 100%;
+}
