@@ -1,6 +1,6 @@
 
 :root{
-    --cor_fundo: #FEFFDE;
+    --cor_fundo: #FAF3E0;
     --primeira_cor_gradiente: #00567a;
     --segunda_cor_gradiente: #008ac5;
     --cor_div_clara: #EEF2E6;
@@ -47,7 +47,7 @@
 }
 
 .main-logo {
-  font-size: 40px;
+  font-size: 36px;
   color: white;
   text-decoration: none;
   display: flex;
