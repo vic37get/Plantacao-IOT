@@ -3,7 +3,7 @@ import json
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.template import loader
-from pyowm.owm import OWM
+from utils import previsão_tempo
 
 
 # Create your views here.
@@ -12,7 +12,7 @@ def home(request):
     context={
 
     }
-
+    previsão_tempo()
     return HttpResponse(template.render(context, request))
 
 def led(request):
