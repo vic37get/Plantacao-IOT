@@ -4,11 +4,19 @@
     {% include 'plantacao_app/partials/header.html' %}
     <main class="main-content-container m-5">
         <div class="main-content main-content-list container row-cols-1 justify-content-center mt-5">
-            <div class="col quadro"><div class="TextoTituloCard"><i class="fa-solid fa-faucet-drip"></i> Ligar/Desligar</div></div>
-            <div class="col quadro"><div class="TextoTituloCard"><i class="fa-solid fa-droplet"></i> Umidade do solo</div></div>
+            <div class="col quadro"><div class="TextoTituloCard"><i class="fa-solid fa-faucet-drip"></i> Ligar/Desligar</div>
+
+        </div>
+            <div class="col quadro"><div class="TextoTituloCard"><i class="fa-solid fa-droplet"></i> Umidade do solo</div>
+        </div>
             <div class="col quadro"><div class="TextoTituloCard"><i class="fa-solid fa-temperature-three-quarters"></i> Temperatura</div></div>
             <div class="col quadro"><div class="TextoTituloCard"><i class="fa-solid fa-cloud-rain"></i> Chuva</div></div>
-            <div class="col quadro"><div class="TextoTituloCard"><i class="fa-solid fa-cloud-sun"></i> Previsão do tempo</div></div>
+            <div class="col quadro"><div class="TextoTituloCard"><i class="fa-solid fa-cloud-sun"></i> Previsão do tempo</div>
+                <div class="box_dados">
+                    <p class="dados_previsao">Temperatura: <i class="minima"><i class="fa-solid fa-temperature-arrow-down"></i> {{temperatura_minima}}</i> | <i class="maxima"><i class="fa-solid fa-temperature-arrow-up"></i> {{temperatura_maxima}}</i></p>
+                    <p class="dados_previsao">Umidade do ar: <i class="minima"><i class="fa-solid fa-down-long"></i> {{umidade_minima}}</i> | <i class="maxima"><i class="fa-solid fa-up-long"></i> {{umidade_maxima}}</i></p>
+                </div>
+            </div>
             <div class="col quadro"><div class="TextoTituloCard"><i class="fa-solid fa-cloud-showers-water"></i> Umidade da terra</div></div>
         </div>
     </main>
@@ -16,6 +24,5 @@
         <div class="foot"><i class="fa-solid fa-seedling"></i> &copy; 2022, Plantação IOT</div>
     </footer>
 </body>
-
 
 </html>
