@@ -1,24 +1,86 @@
 
 :root{
-    --cor_fundo: #DAD7CD;
-    --cor_principal: #1FAB89;
+    --cor_fundo: #FEFFDE;
+    --primeira_cor_gradiente: #00567a;
+    --segunda_cor_gradiente: #008ac5;
     --cor_div_clara: #EEF2E6;
     --cor_div_mais_clara: #9DF3C4;
     --cor_bordas: rgb(150, 150, 150);
-    --fonte: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    --fonte-principal: sans-serif;
+    --fonte-titulos: 'Roboto Slab', serif;
 }
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 
+}
 
-body{
-    background-color: var(--cor_fundo);
-    margin: 0;
+.main-header-container {
+  background-image: linear-gradient(#008ac5, #00567a);
+  border-bottom: 1px solid var(--cor_bordas);	
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+}
+
+.container {
+  max-width: 144rem;
+  margin: 0 auto;
+  padding: 3rem;
+}
+
+.TextoTituloCard{
+  background-color: #008ac5;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  border-bottom: inherit;
+  color: white;
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+}
+
+.quadro{
+  border: 2px solid var(--primeira_cor_gradiente);
+  border-radius: 15px;
+  text-align: center;
+  background-color: #F0F0F0;
+  height: 250px;
+}
+
+.main-logo {
+  font-size: 40px;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.main-logo-icon {
+  margin-right: 1rem;
+}
+
+.main-content {
+  padding-top: 0;
+}
+
+.main-content-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 4rem;
+}
+
+body {
+  font-size: 1.3rem;
+  font-family: var(--fonte);
+  background: var(--cor_fundo);
 }
 
 footer {
     z-index: 5;
-    background-color: var(--cor_principal);
-    position: absolute !important;
+    background-image: linear-gradient(#008ac5,#00567a);
     width: 100%;
     height: fit-content;
     bottom: 0 !important;
@@ -27,35 +89,13 @@ footer {
     flex: 0;
   }
 
-.main{
-    border: 1px solid var(--cor_bordas);
-    border-radius: 10px;
-    background-color: #1FAB89;
-    position: absolute;
-    top: 0; bottom: 0;
-    left: 0; right: 0;
-    margin: auto;
-    height: 60%;
-    width: 80%;
-}
-
-
-.menu {
-    background-color: var(--cor_principal) !important;
-    box-shadow: 0 0 1vh black !important;
-    color: white;
-    border-bottom: 0.2vh solid #ffffff !important;
-    position: fixed !important;
-    width: 100%;
-    z-index: 4;
-  }
 
   .foot{
     color: white;
     text-shadow: 1px 1px 1px black;
     text-align: center;
     font-family: var(--fonte);
-    font-size: 14px;
+    font-size: 16px;
     padding: 0 !important;
     margin: 0.5vh !important;
   }

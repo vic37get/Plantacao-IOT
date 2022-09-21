@@ -3,6 +3,7 @@ import json
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.template import loader
+from pyowm.owm import OWM
 
 
 # Create your views here.
@@ -11,6 +12,7 @@ def home(request):
     context={
 
     }
+
     return HttpResponse(template.render(context, request))
 
 def led(request):
