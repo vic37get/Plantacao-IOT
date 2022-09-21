@@ -6,7 +6,7 @@
     --cor_div_clara: #EEEEEE;
     --cor_bordas: rgb(150, 150, 150);
     --fonte-principal: sans-serif;
-    --fonte-titulos: 'Roboto Slab', serif;
+    --fonte-titulos: 'Roboto', sans-serif;
 }
 
 * {
@@ -39,8 +39,9 @@
 
 
 .box_dados{
-  font-size: 24px;
-  margin-top: 55px;
+  font-family: var(--fonte-titulos);
+  font-size: 20px;
+  margin-top: 60px;
 }
 
 .quadro{
