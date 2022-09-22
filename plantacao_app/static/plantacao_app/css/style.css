@@ -1,9 +1,9 @@
 
 :root{
-    --cor_fundo: #00b6c0;
-    --primeira_cor_gradiente: #393E46;
-    --segunda_cor_gradiente: #222831;
-    --cor_div_clara: #EEEEEE;
+    --cor_fundo:rgb(206, 206, 224);
+    --primeira_cor_gradiente: #0b3c79;
+    --segunda_cor_gradiente: #051933;
+    --cor_div_clara: #e9e7e9;
     --cor_bordas: rgb(150, 150, 150);
     --fonte-principal: sans-serif;
     --fonte-titulos: 'Roboto', sans-serif;
@@ -17,8 +17,8 @@
 }
 
 .main-header-container {
-  background-image: linear-gradient(#222831, #393E46);
-  border-bottom: 1px solid var(--cor_div_clara);	
+  background-image: linear-gradient(#0b3c79, #09254b);
+  border-bottom: 1px solid var(--cor_bordas);	
   text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
 }
 
@@ -28,30 +28,55 @@
   padding: 3rem;
 }
 
-.TextoTituloCard{
-  background-color: var(--segunda_cor_gradiente);
-  border-top-right-radius: 12px;
-  border-top-left-radius: 12px;
-  border-bottom: inherit;
-  color: white;
-  text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+.TextoTituloCardOnOff{
+  height: 3px;
+  background-color: hsl(0, 78%, 62%);
 }
 
+.TextoTituloCardUmidSolo{
+  height: 3px;
+  background-color: #ff833b9c;
+}
 
-.box_dados{
+.TextoTituloCardTemp{
+  height: 3px;
+  background-color: #e7d84dbe;
+}
+
+.TextoTituloCardChuva{
+  height: 3px;
+  background-color: #5e54e693;
+}
+
+.TextoTituloCardPrev{
+  height: 3px;
+  background-color: hsl(180, 62%, 55%);
+}
+
+.TextoTituloCardUmidTerra{
+  height: 3px;
+  background-color: #31c72c7e;
+}
+
+.box_dadosTitulo{
   font-family: var(--fonte-titulos);
   font-size: 20px;
-  margin-top: 60px;
+  margin-top: 30px;
+}
+
+.box_dadosConteudo{
+  font-family: var(--fonte-titulos);
+  font-size: 20px;
+  margin-top: 30px;
 }
 
 .quadro{
-  border: 2px solid var(--primeira_cor_gradiente);
-  border-radius: 15px;
+  border: 1px solid var(--cor_bordas);
   text-align: center;
   background-color: var(--cor_div_clara);
   height: 250px;
   transition: all 150ms ease-in-out; 
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  box-shadow: 0px 20px 30px -20px rgba(0, 0, 0, 0.473);
 }
 
 .quadro:hover{
@@ -94,8 +119,8 @@ body {
 
 footer {
     z-index: 5;
-    border-top: 1px solid var(--cor_div_clara);
-    background-image: linear-gradient(#393E46,#222831);
+    border-top: 1px solid var(--cor_bordas);
+    background-image: linear-gradient(#09254b,#0b3c79);
     width: 100%;
     height: fit-content;
     bottom: 0 !important;
