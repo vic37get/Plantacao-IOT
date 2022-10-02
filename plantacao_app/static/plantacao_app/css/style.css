@@ -13,7 +13,6 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
 
 }
 
@@ -113,7 +112,6 @@
   gap: 4rem;
 }
 
-
 html{
   height: 100% !important;
   width: 100% !important;
@@ -132,8 +130,6 @@ body{
   padding: 0 !important;
 }
 
-
-
 footer {
     z-index: 5;
     position: absolute;
@@ -146,7 +142,6 @@ footer {
     margin: 0 !important;
     flex: 0;
   }
-
 
   .foot{
     color: white;
