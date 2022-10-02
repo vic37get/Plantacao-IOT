@@ -22,16 +22,24 @@
                 <div class="box_dadosTitulo">
                     <i class="fa-solid fa-droplet"></i> Umidade do solo
                 </div>
+                <div class="box_dadosConteudo">
+                    <p class="dados_previsao">Umidade do solo: <i class="minima"><i class="fa-solid fa-droplet"></i> {{umidade_dht11}}%</i></p>
+                </div>
             </div>
             <div class="col quadro"><div class="TextoTituloCardTemp"></div>
                 <div class="box_dadosTitulo">
                     <i class="fa-solid fa-temperature-three-quarters"></i> Temperatura<br>
-                    {{temperatura_dht11}}
+                </div>
+                <div class="box_dadosConteudo">
+                    <p class="dados_previsao">Temperatura sensor DHT11: <i class="minima"><i class="fa-solid fa-temperature-three-quarters"></i> {{temperatura_dht11}}º</i></p>
                 </div>
             </div>
             <div class="col quadro"><div class="TextoTituloCardChuva"></div>
                 <div class="box_dadosTitulo">
                     <i class="fa-solid fa-cloud-rain"></i> Chuva
+                </div>
+                <div class="box_dadosConteudo">
+                    <p class="dados_previsao">Status da chuva: <i class="minima"><i class="fa-solid fa-cloud-rain"></i> {{chuva}}</i></p>
                 </div>
             </div>
             <div class="col quadro"><div class="TextoTituloCardPrev"></div>
@@ -47,10 +55,13 @@
                 <div class="box_dadosTitulo">
                     <i class="fa-solid fa-wind"></i> Umidade do ar
                 </div>
+                <div class="box_dadosConteudo">
+                    <p class="dados_previsao">Umidade sensor Dht11: <i class="minima"><i class="fa-solid fa-wind"></i> {{umidade_dht11}}%</i></p>
+                </div>
             </div>
         </div>
     </main>
-    <footer class="p-2">
+    <footer>
         <div class="foot"><i class="fa-solid fa-seedling"></i> &copy; 2022, Plantação IOT</div>
     </footer>
 </body>
