@@ -33,7 +33,7 @@ body{
 }
 
 footer {
-  z-index: 5;
+  z-index: 6;
   border-top: 1px solid white;
   background-image: linear-gradient(#0b3c79, #09254b);
   position: absolute !important;
@@ -111,7 +111,7 @@ footer {
 .quadro:hover{
   transform: scale(1.02);
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  z-index: 10;
+  z-index: 5;
 }
 
 .main-logo {
