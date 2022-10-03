@@ -27,6 +27,7 @@
         <link href={%static "plantacao_app/css/style.css" %} rel="stylesheet" referrerpolicy="origin"></script>
         <!-- Toggle button -->
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 
         <!-- Icones fontaweasome-->
@@ -62,22 +63,26 @@
                             <span class="off">OFF</span>
                             </div>
                         </label>
+                        <br>
+                        <p class="dados_previsao">Status: <span id="status_torneira"><i class="fa-solid fa-power-off"></i> <span id='status'> {{status}}</span></i></span></p>
                     </div>
                 </div>
+
                 <div class="col quadro"><div class="TextoTituloCardUmidSolo"></div>
                     <div class="box_dadosTitulo">
                         <i class="fa-solid fa-droplet"></i> Umidade do solo
                     </div>
                     <div class="box_dadosConteudo">
-                        <p class="dados_previsao">Umidade do solo: <i class="minima"><i class="fa-solid fa-droplet"></i> {{umidade_solo}}%</i></p>
+                        <p class="dados_previsao">Umidade do solo: <i class="minima"><i class="fa-solid fa-droplet"></i> <span id='umidade_solo'>{{umidade_solo}}</span>%</i></p>
                     </div>
                 </div>
-                <div class="col quadro"><div class="TextoTituloCardTemp"></div>
+
+                <div id='ff' class="col quadro"><div class="TextoTituloCardTemp"></div>
                     <div class="box_dadosTitulo">
                         <i class="fa-solid fa-temperature-three-quarters"></i> Temperatura<br>
                     </div>
                     <div class="box_dadosConteudo">
-                        <p class="dados_previsao">Temperatura sensor DHT11: <i class="minima"><i class="fa-solid fa-temperature-three-quarters"></i> {{temperatura_dht11}}º</i></p>
+                        <p class="dados_previsao">Temperatura sensor DHT11: <span id="temperatura"><i class="fa-solid fa-temperature-three-quarters"></i> <span id='temperatura_dht11'> {{temperatura_dht11}}</span>º</i></span></p>
                     </div>
                 </div>
                 <div class="col quadro"><div class="TextoTituloCardChuva"></div>
@@ -85,7 +90,7 @@
                         <i class="fa-solid fa-cloud-rain"></i> Chuva
                     </div>
                     <div class="box_dadosConteudo">
-                        <p class="dados_previsao">Status da chuva: <i class="minima"><i class="fa-solid fa-cloud-rain"></i> {{chuva}}</i></p>
+                        <p class="dados_previsao">Status da chuva: <i class="minima"><i class="fa-solid fa-cloud-rain"></i> <span id="chuva"> {{chuva}}</span></i></p>
                     </div>
                 </div>
                 <div class="col quadro"><div class="TextoTituloCardPrev"></div>
@@ -102,7 +107,7 @@
                         <i class="fa-solid fa-wind"></i> Umidade do ar
                     </div>
                     <div class="box_dadosConteudo">
-                        <p class="dados_previsao">Umidade sensor DHT11: <i class="minima"><i class="fa-solid fa-wind"></i> {{umidade_dht11}}%</i></p>
+                        <p class="dados_previsao">Umidade sensor DHT11: <i class="minima"><i class="fa-solid fa-wind"></i> <span id="umidadeAr"> {{umidade_dht11}}</span>%</i></p>
                     </div>
                 </div>
             </div>
@@ -111,4 +116,59 @@
         <footer>
             <div class="foot"><i class="fa-solid fa-seedling"></i> &copy; 2022, Plantação IOT</div>
         </footer>
+    <script>
+        function get_fb(){
+            var content = '';
+            $.ajax({
+                type: 'POST',
+                url: '/results',
+                contentType: 'application/json; charset=utf-8',
+                cache: false,
+                complete: function(data){
+                    setTimeout(function(){get_fb();}, 2000);
+                    console.log(data.responseJSON);
+                    document.getElementById('status').innerHTML=data.responseJSON['status'];
+                    status = data.responseJSON['status'];
+                    document.getElementById('umidade_solo').innerHTML=data.responseJSON['umidadeSolo'];
+                    document.getElementById('temperatura_dht11').innerHTML=data.responseJSON['temperatura'];
+                    temp = data.responseJSON['temperatura'];
+                    document.getElementById('chuva').innerHTML=data.responseJSON['chuva'];
+                    document.getElementById('umidadeAr').innerHTML=data.responseJSON['umidadeAr'];
+
+                    /*Temperatura*/
+                    if(temp>=30){
+                        element = document.getElementById('temperatura')
+                        element.setAttribute('class', 'maxima');
+                    }
+                    else{
+                        element = document.getElementById('temperatura')
+                        element.setAttribute('class', 'minima');
+                    }
+                    
+                    /*Status*/
+                    if(status==1){
+                        element = document.getElementById('status_torneira')
+                        element.setAttribute('class', 'statuson');
+                    }
+                    else{
+                        element = document.getElementById('status_torneira')
+                        element.setAttribute('class', 'statusoff');
+                    }
+
+                    /*Umidade do solo*/
+                    if(status==1){
+                        element = document.getElementById('status_torneira')
+                        element.setAttribute('class', 'statuson');
+                    }
+                    else{
+                        element = document.getElementById('status_torneira')
+                        element.setAttribute('class', 'statusoff');
+                    }
+                    
+                    
+                },
+            });
+        }
+        get_fb();
+    </script>
 </html>
