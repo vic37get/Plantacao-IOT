@@ -31,7 +31,6 @@ def recebe_informacoes(request):
     json_dados = json.dumps(response_data, indent=4)
     with open('informacoes.json', 'w') as f:
         f.write(json_dados)
-    print(response_data)
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 @csrf_exempt

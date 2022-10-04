@@ -1,8 +1,8 @@
 {
-    "temperatura": "12",
+    "temperatura": "45",
     "umidade": "15",
     "chuva": "0",
-    "status": "0",
-    "umidadeAr": "50",
-    "umidadeSolo": "80"
+    "status": "1",
+    "umidadeAr": "67",
+    "umidadeSolo": "40"
 }

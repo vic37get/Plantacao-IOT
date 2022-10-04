@@ -73,7 +73,7 @@
                         <i class="fa-solid fa-droplet"></i> Umidade do solo
                     </div>
                     <div class="box_dadosConteudo">
-                        <p class="dados_previsao">Umidade do solo: <i class="minima"><i class="fa-solid fa-droplet"></i> <span id='umidade_solo'>{{umidade_solo}}</span>%</i></p>
+                        <p class="dados_previsao">Umidade do solo: <span id="umidadeSolo"><i class="fa-solid fa-droplet"></i> <span id='umidade_solo'>{{umidade_solo}}</span>%</i></span></p>
                     </div>
                 </div>
 
@@ -82,17 +82,19 @@
                         <i class="fa-solid fa-temperature-three-quarters"></i> Temperatura<br>
                     </div>
                     <div class="box_dadosConteudo">
-                        <p class="dados_previsao">Temperatura sensor DHT11: <span id="temperatura"><i class="fa-solid fa-temperature-three-quarters"></i> <span id='temperatura_dht11'> {{temperatura_dht11}}</span>º</i></span></p>
+                        <p class="dados_previsao">Temperatura atual: <span id="temperatura"><i class="fa-solid fa-temperature-three-quarters"></i> <span id='temperatura_dht11'> {{temperatura_dht11}}</span>º</i></span></p>
                     </div>
                 </div>
+
                 <div class="col quadro"><div class="TextoTituloCardChuva"></div>
                     <div class="box_dadosTitulo">
                         <i class="fa-solid fa-cloud-rain"></i> Chuva
                     </div>
                     <div class="box_dadosConteudo">
-                        <p class="dados_previsao">Status da chuva: <i class="minima"><i class="fa-solid fa-cloud-rain"></i> <span id="chuva"> {{chuva}}</span></i></p>
+                        <p class="dados_previsao">Status da chuva: <span id="chuva_status"><i class="fa-solid fa-cloud-rain"> <span id="chuva"> {{chuva}}</span></i></span></p>
                     </div>
                 </div>
+
                 <div class="col quadro"><div class="TextoTituloCardPrev"></div>
                     <div class="box_dadosTitulo">
                             <i class="fa-solid fa-cloud-sun"></i> Previsão do tempo
@@ -102,20 +104,23 @@
                             <p class="dados_previsao">Umidade do ar: <i class="minima"><i class="fa-solid fa-down-long"></i> {{umidade_minima}}</i> | <i class="maxima"><i class="fa-solid fa-up-long"></i> {{umidade_maxima}}</i></p>
                     </div>
                 </div>
-                <div class="col quadro"><div class="TextoTituloCardUmidTerra"></div>
+
+                <div class="col quadro"><div class="TextoTituloCardUmidAr"></div>
                     <div class="box_dadosTitulo">
                         <i class="fa-solid fa-wind"></i> Umidade do ar
                     </div>
                     <div class="box_dadosConteudo">
-                        <p class="dados_previsao">Umidade sensor DHT11: <i class="minima"><i class="fa-solid fa-wind"></i> <span id="umidadeAr"> {{umidade_dht11}}</span>%</i></p>
+                        <p class="dados_previsao">Umidade atual: <span id="umidade_ar"><i class="fa-solid fa-wind"></i> <span id="umidadeAr"> {{umidade_dht11}}</span>%</i></span></p>
                     </div>
                 </div>
             </div>
         </main>
     </body>
-        <footer>
-            <div class="foot"><i class="fa-solid fa-seedling"></i> &copy; 2022, Plantação IOT</div>
-        </footer>
+    <footer>
+        <div class="foot"><i class="fa-solid fa-seedling"></i> &copy; 2022, Plantação IOT</div>
+    </footer>
+
+</html>
     <script>
         function get_fb(){
             var content = '';
@@ -126,49 +131,36 @@
                 cache: false,
                 complete: function(data){
                     setTimeout(function(){get_fb();}, 2000);
-                    console.log(data.responseJSON);
                     document.getElementById('status').innerHTML=data.responseJSON['status'];
-                    status = data.responseJSON['status'];
                     document.getElementById('umidade_solo').innerHTML=data.responseJSON['umidadeSolo'];
                     document.getElementById('temperatura_dht11').innerHTML=data.responseJSON['temperatura'];
-                    temp = data.responseJSON['temperatura'];
                     document.getElementById('chuva').innerHTML=data.responseJSON['chuva'];
                     document.getElementById('umidadeAr').innerHTML=data.responseJSON['umidadeAr'];
 
+                    status = data.responseJSON['status'];
+                    umidadeSolo = data.responseJSON['umidadeSolo'];
+                    temp = data.responseJSON['temperatura'];
+                    chuva = data.responseJSON['chuva'];
+                    umidade_ar = data.responseJSON['umidadeAr'];
+                    
                     /*Temperatura*/
-                    if(temp>=30){
-                        element = document.getElementById('temperatura')
-                        element.setAttribute('class', 'maxima');
-                    }
-                    else{
-                        element = document.getElementById('temperatura')
-                        element.setAttribute('class', 'minima');
-                    }
+                    exibeDado(temp, 30, 'temperatura', 'maxima', 'minima')
                     
                     /*Status*/
-                    if(status==1){
-                        element = document.getElementById('status_torneira')
-                        element.setAttribute('class', 'statuson');
-                    }
-                    else{
-                        element = document.getElementById('status_torneira')
-                        element.setAttribute('class', 'statusoff');
-                    }
+                    exibeDado(status, 0, 'status_torneira', 'statuson', 'statusoff')
 
                     /*Umidade do solo*/
-                    if(status==1){
-                        element = document.getElementById('status_torneira')
-                        element.setAttribute('class', 'statuson');
-                    }
-                    else{
-                        element = document.getElementById('status_torneira')
-                        element.setAttribute('class', 'statusoff');
-                    }
-                    
+                    exibeDado(umidadeSolo, 50, 'umidadeSolo', 'minima', 'maxima')
+
+                    /*Chuva*/
+                    exibeDado(chuva, 0, 'chuva_status', 'statusoff', 'statuson')
+
+                    /*Umidade do ar*/
+                    exibeDado(umidade_ar, 50, 'umidade_ar', 'minima', 'maxima')     
                     
                 },
             });
         }
         get_fb();
     </script>
-</html>
+

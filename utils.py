@@ -10,7 +10,9 @@ def temperaturaMinima():
     page = requests.get(request)
     soup = BeautifulSoup(page.content, 'html.parser')
     temperatura = soup.find_all('span', id='min-temp-1')
-    temperatura = re.sub(exp, '', str(temperatura[0]))
+    #print(temperatura)
+    temperatura = re.sub(exp, '', str(temperatura))
+    temperatura = temperatura[1:4]
     return temperatura
 
 def temperaturaMaxima():
