@@ -30,7 +30,7 @@ def home(request):
 def recebe_informacoes(request):
     collection_data = db_client['AplicacaoData']
     collection_token = db_client['token']
-    auth = collection_token.find_one()
+    auth = collection_token.find_one({})
     token = auth['token']
     dados = request.GET
     if len(dados) == 6 and dados['token'] == token:
