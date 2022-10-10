@@ -5,7 +5,7 @@ from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from utils import (temperaturaMaxima, temperaturaMinima, umidadeMaxima,
                    umidadeMinima)
-from utils import connectMongo
+#from utils import connectMongo
 
 db_client = connectMongo('PlantacaoIOT')
 
@@ -28,9 +28,9 @@ def home(request):
 
 @csrf_exempt
 def recebe_informacoes(request):
-    collection_data = db_client['AplicacaoData']
-    collection_token = db_client['token']
-    auth = collection_token.find_one({})
+    #collection_data = db_client['AplicacaoData']
+    #collection_token = db_client['token']
+    #auth = collection_token.find_one({})
     token = auth['token']
     dados = request.GET
     if len(dados) == 6 and dados['token'] == token:
@@ -47,7 +47,7 @@ def recebe_informacoes(request):
         with open('informacoes.json', 'w') as f:
             json.dump(json_dados, f)
         
-        collection_data.insert_one(json_dados)
+        #collection_data.insert_one(json_dados)
         del json_dados['_id']
         return HttpResponse(json.dumps(json_dados), content_type="application/json")
     else:
