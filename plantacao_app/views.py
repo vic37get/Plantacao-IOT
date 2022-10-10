@@ -7,7 +7,7 @@ from utils import (temperaturaMaxima, temperaturaMinima, umidadeMaxima,
                    umidadeMinima)
 #from utils import connectMongo
 
-db_client = connectMongo('PlantacaoIOT')
+#db_client = connectMongo('PlantacaoIOT')
 
 def home(request):
     with open('informacoes.json', 'r') as f:
