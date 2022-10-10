@@ -31,7 +31,7 @@ def recebe_informacoes(request):
     #collection_data = db_client['AplicacaoData']
     #collection_token = db_client['token']
     #auth = collection_token.find_one({})
-    token = 35287412
+    token = "35287412"
     dados = request.GET
     if len(dados) == 6 and dados['token'] == token:
         json_dados = json.dumps(dados, indent=4)
