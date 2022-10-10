@@ -5,7 +5,9 @@ from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from utils import (temperaturaMaxima, temperaturaMinima, umidadeMaxima,
                    umidadeMinima)
+from utils import connectMongo
 
+db_client = connectMongo('PlantacaoIOT')
 
 def home(request):
     with open('informacoes.json', 'r') as f:
@@ -17,22 +19,37 @@ def home(request):
         'status': dados['status'],
         'umidade_dht11': dados['umidadeAr'],
         'umidade_solo': dados['umidadeSolo'],
-        'temperatura_minima': temperaturaMinima(),
-        'temperatura_maxima': temperaturaMaxima(),
-        'umidade_minima': umidadeMinima(),
-        'umidade_maxima': umidadeMaxima(),
+        'temperatura_minima': dados['temperatura_minima'],
+        'temperatura_maxima': dados['temperatura_maxima'],
+        'umidade_minima': dados['umidade_minima'],
+        'umidade_maxima': dados['umidade_maxima'],
     }
     return HttpResponse(template.render(context, request))
 
 @csrf_exempt
 def recebe_informacoes(request):
-    token = '352896531'
+    collection_data = db_client['AplicacaoData']
+    collection_token = db_client['token']
+    auth = collection_token.find_one()
+    token = auth['token']
     dados = request.GET
     if len(dados) == 6 and dados['token'] == token:
         json_dados = json.dumps(dados, indent=4)
+        json_dados = json.loads(json_dados)
+        previsao_tempo = {
+        'temperatura_minima': temperaturaMinima(),
+        'temperatura_maxima': temperaturaMaxima(),
+        'umidade_minima': umidadeMinima(),
+        'umidade_maxima': umidadeMaxima(),
+        }
+        json_dados.update(previsao_tempo)
+        del json_dados['token']
         with open('informacoes.json', 'w') as f:
-            f.write(json_dados)
-        return HttpResponse(json.dumps(dados), content_type="application/json")
+            json.dump(json_dados, f)
+        
+        collection_data.insert_one(json_dados)
+        del json_dados['_id']
+        return HttpResponse(json.dumps(json_dados), content_type="application/json")
     else:
         return HttpResponseForbidden()
 

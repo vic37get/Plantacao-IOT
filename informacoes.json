@@ -1,8 +1,1 @@
-{
-    "temperatura": "55",
-    "umidadeSolo": "80",
-    "umidadeAr": "50",
-    "status": "0",
-    "chuva": "1",
-    "token": "352896531"
-}
+{"temperatura": "55", "umidadeSolo": "25", "umidadeAr": "50", "status": "0", "chuva": "1", "temperatura_minima": "24\u00b0", "temperatura_maxima": "38\u00b0", "umidade_minima": "19%", "umidade_maxima": "96%"}
