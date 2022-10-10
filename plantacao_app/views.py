@@ -48,7 +48,7 @@ def recebe_informacoes(request):
             json.dump(json_dados, f)
         
         #collection_data.insert_one(json_dados)
-        del json_dados['_id']
+        #del json_dados['_id']
         return HttpResponse(json.dumps(json_dados), content_type="application/json")
     else:
         return HttpResponseForbidden()
