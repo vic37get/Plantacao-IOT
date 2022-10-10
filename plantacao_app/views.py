@@ -1,3 +1,4 @@
+import encodings
 import json
 
 from django.http import HttpResponse, HttpResponseForbidden
@@ -36,11 +37,20 @@ def recebe_informacoes(request):
     if len(dados) == 6 and dados['token'] == token:
         json_dados = json.dumps(dados, indent=4)
         json_dados = json.loads(json_dados)
+        if json_dados['chuva'] == '1':
+            json_dados['chuva'] = 'Sem chuva'
+        else:
+            json_dados['chuva'] = 'Chovendo'
+        
+        if json_dados['status'] == '1':
+            json_dados['status'] = 'Ligado'
+        else:
+            json_dados['status'] = 'Desligado'
         #previsao_tempo = {
         #}
         #json_dados.update(previsao_tempo)
         del json_dados['token']
-        with open('informacoes.json', 'w') as f:
+        with open('informacoes.json', 'w', encoding=("Utf-8")) as f:
             json.dump(json_dados, f)
         
         #collection_data.insert_one(json_dados)
