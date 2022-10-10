@@ -2,7 +2,7 @@ import re
 
 import requests
 from bs4 import BeautifulSoup
-from pymongo import MongoClient
+#from pymongo import MongoClient
 
 #def connectMongo(db_name):
 #    client = MongoClient('mongodb+srv://vic35get:005EFsVTBrldkZpp@plantacaoiot.fc1r2gv.mongodb.net/?retryWrites=true&w=majority&socketTimeoutMS=360000&connectTimeoutMS=360000')
@@ -15,7 +15,6 @@ def temperaturaMinima():
     page = requests.get(request)
     soup = BeautifulSoup(page.content, 'html.parser')
     temperatura = soup.find_all('span', id='min-temp-1')
-    #print(temperatura)
     temperatura = re.sub(exp, '', str(temperatura))
     temperatura = temperatura[1:4]
     return temperatura
