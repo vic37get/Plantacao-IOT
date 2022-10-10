@@ -1,6 +1,6 @@
 import json
 
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from utils import (temperaturaMaxima, temperaturaMinima, umidadeMaxima,
@@ -11,7 +11,6 @@ def home(request):
     with open('informacoes.json', 'r') as f:
         dados = json.load(f)
     template = loader.get_template('plantacao_app/home.html')
-    
     context={
         'temperatura_dht11': dados['temperatura'],
         'chuva': dados['chuva'],
@@ -27,17 +26,18 @@ def home(request):
 
 @csrf_exempt
 def recebe_informacoes(request):
-    response_data = request.GET
-    json_dados = json.dumps(response_data, indent=4)
-    with open('informacoes.json', 'w') as f:
-        f.write(json_dados)
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
+    token = '352896531'
+    dados = request.GET
+    if len(dados) == 6 and dados['token'] == token:
+        json_dados = json.dumps(dados, indent=4)
+        with open('informacoes.json', 'w') as f:
+            f.write(json_dados)
+        return HttpResponse(json.dumps(dados), content_type="application/json")
+    else:
+        return HttpResponseForbidden()
 
 @csrf_exempt
 def result_response(request):
     with open('informacoes.json', 'r') as f:
         dados = json.load(f)
     return HttpResponse(json.dumps(dados), content_type="application/json")
-
-
-
