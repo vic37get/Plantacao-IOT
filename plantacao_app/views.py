@@ -19,10 +19,10 @@ def home(request):
         'status': dados['status'],
         'umidade_dht11': dados['umidadeAr'],
         'umidade_solo': dados['umidadeSolo'],
-        'temperatura_minima': dados['temperatura_minima'],
-        'temperatura_maxima': dados['temperatura_maxima'],
-        'umidade_minima': dados['umidade_minima'],
-        'umidade_maxima': dados['umidade_maxima'],
+        'temperatura_minima': temperaturaMinima(),
+        'temperatura_maxima': temperaturaMaxima(),
+        'umidade_minima': umidadeMinima(),
+        'umidade_maxima': umidadeMaxima(),
     }
     return HttpResponse(template.render(context, request))
 
@@ -36,13 +36,9 @@ def recebe_informacoes(request):
     if len(dados) == 6 and dados['token'] == token:
         json_dados = json.dumps(dados, indent=4)
         json_dados = json.loads(json_dados)
-        previsao_tempo = {
-        'temperatura_minima': temperaturaMinima(),
-        'temperatura_maxima': temperaturaMaxima(),
-        'umidade_minima': umidadeMinima(),
-        'umidade_maxima': umidadeMaxima(),
-        }
-        json_dados.update(previsao_tempo)
+        #previsao_tempo = {
+        #}
+        #json_dados.update(previsao_tempo)
         del json_dados['token']
         with open('informacoes.json', 'w') as f:
             json.dump(json_dados, f)
