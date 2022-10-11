@@ -2,12 +2,12 @@ import re
 
 import requests
 from bs4 import BeautifulSoup
-#from pymongo import MongoClient
+from pymongo import MongoClient
 
-#def connectMongo(db_name):
-#    client = MongoClient('mongodb+srv://vic35get:005EFsVTBrldkZpp@plantacaoiot.fc1r2gv.mongodb.net/?retryWrites=true&w=majority&socketTimeoutMS=360000&connectTimeoutMS=360000')
-#    db = client[db_name]
-#    return db
+def connectMongo(db_name):
+    client = MongoClient('mongodb+srv://vic35get:005EFsVTBrldkZpp@plantacaoiot.fc1r2gv.mongodb.net/?retryWrites=true&w=majority&socketTimeoutMS=360000&connectTimeoutMS=360000')
+    db = client[db_name]
+    return db
 
 def temperaturaMinima():
     request = "https://www.climatempo.com.br/previsao-do-tempo/cidade/264/teresina-pi"
