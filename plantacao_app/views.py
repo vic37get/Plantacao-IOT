@@ -1,6 +1,7 @@
 import json
 
 from bdConect import connectMongo
+from django.contrib import messages
 from django.http import HttpResponse, HttpResponseForbidden
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
@@ -28,30 +29,16 @@ def home(request):
 
 @csrf_exempt
 def recebe_informacoes(request):
-    #collection_token = db_client['token']
-    #auth = collection_token.find_one()
-    #print(auth)
-    token = "35287412"
-    #token = auth['token']
+    collection_token = db_client['token']
+    auth = collection_token.find_one()
+    token = auth['token']
     dados = request.GET
-    print("dadostoken: ", dados['token'])
     if len(dados) == 6 and dados['token'] == token:
         json_dados = json.dumps(dados, indent=4)
         json_dados = json.loads(json_dados)
-        if json_dados['chuva'] == '1':
-            json_dados['chuva'] = 'Sem chuva'
-        else:
-            json_dados['chuva'] = 'Chovendo'
-        
-        if json_dados['status'] == '1':
-            json_dados['status'] = 'Ligado'
-        else:
-            json_dados['status'] = 'Desligado'
-
         del json_dados['token']
         with open('informacoes.json', 'w', encoding=("Utf-8")) as f:
             json.dump(json_dados, f)
-            
         return HttpResponse(json.dumps(json_dados), content_type="application/json")
     else:
         return HttpResponseForbidden()
@@ -62,7 +49,7 @@ def result_response(request):
         dados = json.load(f)
     return HttpResponse(json.dumps(dados), content_type="application/json")
 
-    
+@csrf_exempt
 def saveInfo(request):
     collection_data = db_client['AplicacaoData']
     with open('informacoes.json', 'r') as f:
@@ -74,5 +61,5 @@ def saveInfo(request):
 
 def deleteAllInfo(request):
     collection_data = db_client['AplicacaoData']
-    collection_data.remove({})
+    collection_data.remove()
     return HttpResponse(request)

@@ -1,5 +1,12 @@
 {%load static%}
-
+{% include 'messages.html' %}
+<script>
+    setTimeout(function(){
+      if ($('#msg').length > 0) {
+        $('#msg').remove();
+      }
+    }, 2000)
+</script>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -91,7 +98,7 @@
                         <i class="fa-solid fa-cloud-rain"></i> Chuva
                     </div>
                     <div class="box_dadosConteudo">
-                        <p class="dados_previsao">Status da chuva: <span id="chuva_status"><i class="fa-solid fa-cloud-rain"></i> <span id="chuva"> {{chuva}}</span></span></p>
+                        <p class="dados_previsao">Status da chuva: <span id="chuva_status"><i class="fa-solid fa-cloud-rain"></i> <span id="chuva">{{chuva}}</span></span></p>
                     </div>
                 </div>
 
@@ -144,23 +151,37 @@
                     umidade_ar = data.responseJSON['umidadeAr'];
                     
                     /*Temperatura*/
-                    exibeDado(temp, 30, 'temperatura', 'maxima', 'minima')
+                    showMetricsData(temp, 30, 'temperatura', 'maxima', 'minima')
                     
-                    /*Status*/
-                    exibeDado(status, 0, 'status_torneira', 'statusoff', 'statuson')
-
                     /*Umidade do solo*/
-                    exibeDado(umidadeSolo, 50, 'umidadeSolo', 'minima', 'maxima')
-
-                    /*Chuva*/
-                    exibeDado(chuva, 0, 'chuva_status', 'statusoff', 'statuson')
+                    showMetricsData(umidadeSolo, 50, 'umidadeSolo', 'minima', 'maxima')
 
                     /*Umidade do ar*/
-                    exibeDado(umidade_ar, 50, 'umidade_ar', 'minima', 'maxima')     
-                    
+                    showMetricsData(umidade_ar, 50, 'umidade_ar', 'minima', 'maxima')
+
+                    /*Chuva*/
+                    showBetterData('chuva', 'Sem chuva', 'Chovendo')
+                    showMetricsData(chuva, 1, 'chuva_status', 'statusoff', 'statuson')
+
+                    /*Status*/
+                    showBetterData('status', 'Ligado', 'Desligado')
+                    showMetricsData(status, 1, 'status_torneira', 'statuson', 'statusoff')
                 },
             });
         }
         get_fb();
-    </script>
+        function SaveData(){
+            var content = '';
+            $.ajax({
+                type: 'POST',
+                url: '/saveInfo',
+                contentType: 'application/json; charset=utf-8',
+                cache: false,
+                complete: function(data){
+                    setTimeout(function(){SaveData();}, 600000);
+                },
+            });
+        }
+        SaveData();   
+</script>
 
