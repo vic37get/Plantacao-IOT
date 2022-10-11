@@ -4,9 +4,8 @@ import json
 from django.http import HttpResponse, HttpResponseForbidden
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
-from utils import (temperaturaMaxima, temperaturaMinima, umidadeMaxima,
-                   umidadeMinima)
-from utils import connectMongo
+from utils import (connectMongo, temperaturaMaxima, temperaturaMinima,
+                   umidadeMaxima, umidadeMinima)
 
 db_client = connectMongo('PlantacaoIOT')
 
@@ -29,7 +28,6 @@ def home(request):
 
 @csrf_exempt
 def recebe_informacoes(request):
-    collection_data = db_client['AplicacaoData']
     #collection_token = db_client['token']
     #auth = collection_token.find_one()
     #print(auth)
@@ -49,15 +47,11 @@ def recebe_informacoes(request):
             json_dados['status'] = 'Ligado'
         else:
             json_dados['status'] = 'Desligado'
-        #previsao_tempo = {
-        #}
-        #json_dados.update(previsao_tempo)
+
         del json_dados['token']
         with open('informacoes.json', 'w', encoding=("Utf-8")) as f:
             json.dump(json_dados, f)
-        
-        collection_data.insert_one(json_dados)
-        del json_dados['_id']
+            
         return HttpResponse(json.dumps(json_dados), content_type="application/json")
     else:
         return HttpResponseForbidden()
@@ -67,3 +61,18 @@ def result_response(request):
     with open('informacoes.json', 'r') as f:
         dados = json.load(f)
     return HttpResponse(json.dumps(dados), content_type="application/json")
+
+    
+def saveInfo(request):
+    collection_data = db_client['AplicacaoData']
+    with open('informacoes.json', 'r') as f:
+        dados = json.load(f)
+    print(dados)
+    print(type(dados))
+    collection_data.insert_one(dados)
+    return HttpResponse(request)
+
+def deleteAllInfo(request):
+    collection_data = db_client['AplicacaoData']
+    collection_data.remove({})
+    return HttpResponse(request)
