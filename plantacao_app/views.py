@@ -1,11 +1,11 @@
-import encodings
 import json
 
+from bdConect import connectMongo
 from django.http import HttpResponse, HttpResponseForbidden
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
-from utils import (connectMongo, temperaturaMaxima, temperaturaMinima,
-                   umidadeMaxima, umidadeMinima)
+from utils import (temperaturaMaxima, temperaturaMinima, umidadeMaxima,
+                   umidadeMinima)
 
 db_client = connectMongo('PlantacaoIOT')
 
