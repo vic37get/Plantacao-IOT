@@ -47,22 +47,21 @@
         <title>Plantacao IOT</title>
     </head>
         <header class="main-header-container">
-            <div class="main-header container">
-                <h6>
-                    <p class="main-logo" href="/">
+            <div class="main-header box-container">
+                <p class="main-logo" href="/">
                         <span><i class="fa-solid fa-leaf"></i> Plantação IOT</span>
-                    </p>
-                </h6>
+                </p>
             </div>
         </header>
     <body>
         <main class="main-content-container m-5">
-            <div class="main-content main-content-list container row-cols-1 justify-content-center mt-5">
+            <div class="main-content main-content-list row-cols-1 justify-content-center mt-5">
                 <div class="col quadro"><div class="TextoTituloCardOnOff"></div>
                     <div class="box_dadosTitulo">
-                        <i class="fa-solid fa-faucet-drip"></i> Ligar/Desligar
+                        <i class="fa-solid fa-faucet-drip"></i> Status da Irrigação
                     </div>
                     <div class="box_dadosConteudo">
+                        <!--
                         <label class="switch">
                             <input type="checkbox" id="togBtn">
                             <div class="slider round">
@@ -71,7 +70,8 @@
                             </div>
                         </label>
                         <br>
-                        <p class="dados_previsao">Status: <span id="status_torneira"><i class="fa-solid fa-power-off"></i> <span id='status'> {{status}}</span></i></span></p>
+                        -->
+                        <p class="dados_previsao"><span id="status_torneira"><i class="fa-solid fa-power-off"></i> <span id='status'> {{status}}</span></i></span></p>
                     </div>
                 </div>
 
@@ -178,7 +178,7 @@
                 contentType: 'application/json; charset=utf-8',
                 cache: false,
                 complete: function(data){
-                    setTimeout(function(){SaveData();}, 600000);
+                    setTimeout(function(){SaveData();}, 3600000);
                 },
             });
         }
