@@ -30,11 +30,13 @@ def home(request):
 @csrf_exempt
 def recebe_informacoes(request):
     collection_data = db_client['AplicacaoData']
-    collection_token = db_client['token']
-    auth = collection_token.find_one({})
-    #token = "35287412"
-    token = auth['token']
+    #collection_token = db_client['token']
+    #auth = collection_token.find_one()
+    #print(auth)
+    token = "35287412"
+    #token = auth['token']
     dados = request.GET
+    print("dadostoken: ", dados['token'])
     if len(dados) == 6 and dados['token'] == token:
         json_dados = json.dumps(dados, indent=4)
         json_dados = json.loads(json_dados)
