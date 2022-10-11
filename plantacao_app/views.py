@@ -1,8 +1,11 @@
 import json
+from datetime import datetime, timezone
 
+import pytz
 from bdConect import connectMongo
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseForbidden
+from django.shortcuts import redirect
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from utils import (temperaturaMaxima, temperaturaMinima, umidadeMaxima,
@@ -54,12 +57,14 @@ def saveInfo(request):
     collection_data = db_client['AplicacaoData']
     with open('informacoes.json', 'r') as f:
         dados = json.load(f)
-    print(dados)
-    print(type(dados))
+    timezone = pytz.timezone('Brazil/East')
+    time = datetime.now(timezone)
+    dados['data'] = time.strftime("%m/%d/%Y %H:%M:%S")
     collection_data.insert_one(dados)
     return HttpResponse(request)
 
 def deleteAllInfo(request):
     collection_data = db_client['AplicacaoData']
     collection_data.remove()
-    return HttpResponse(request)
+    messages.success(request, 'Os registros foram excluídos!')
+    return redirect('/')
