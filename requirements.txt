@@ -6,3 +6,5 @@ whitenoise>=6.0
 pymongo
 dnspython
 regex==2022.8.17
+pytz
+datetime
