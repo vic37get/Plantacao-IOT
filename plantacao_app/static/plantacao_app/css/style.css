@@ -1,8 +1,8 @@
 
 :root{
     --cor_fundo:rgb(229, 229, 241);
-    --primeira_cor_gradiente: #0b3c79;
-    --segunda_cor_gradiente: #051933;
+    --primeira_cor_gradiente: #0b790b;
+    --segunda_cor_gradiente: #073305;
     --cor_div_clara: #ffffff;
     --cor_bordas: rgb(206, 206, 206);
     --cor_borda_footer: rgb(255, 255, 255);
@@ -35,7 +35,7 @@ body{
 footer {
   z-index: 10;
   border-top: 1px solid white;
-  background-image: linear-gradient(#0b3c79, #09254b);
+  background-image: linear-gradient(#18790b, #073305);
   position: absolute !important;
   width: 100%;
   height: fit-content;
@@ -46,16 +46,14 @@ footer {
 }
 
 .main-header-container {
-  background-image: linear-gradient(#0b3c79, #09254b);
+  background-image: linear-gradient(#18790b, #073305);
   border-bottom: 1px solid var(--cor_borda_footer);	
   text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
   box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
 
-.container {
-  max-width: 144rem;
-  margin: 0 auto;
-  padding: 3rem;
+.box-container {
+  padding: 2.2rem;
 }
 
 .TextoTituloCardOnOff{
@@ -116,7 +114,7 @@ footer {
 }
 
 .main-logo {
-  font-size: 32px;
+  font-size: 30px;
   color: white;
   text-decoration: none;
   display: flex;
