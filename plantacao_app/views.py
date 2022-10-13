@@ -30,6 +30,13 @@ def home(request):
     }
     return HttpResponse(template.render(context, request))
 
+def dashboard(request):
+    dashboard = loader.get_template('plantacao_app/dashboard.html')
+    context={
+        
+    }
+    return HttpResponse(dashboard.render(context, request))
+
 @csrf_exempt
 def recebe_informacoes(request):
     collection_token = db_client['token']
@@ -57,11 +64,13 @@ def saveInfo(request):
     collection_data = db_client['AplicacaoData']
     with open('informacoes.json', 'r') as f:
         dados = json.load(f)
-    timezone = pytz.timezone('Brazil/East')
-    time = datetime.now(timezone)
-    dados['data'] = time.strftime("%m/%d/%Y %H:%M:%S")
-    collection_data.insert_one(dados)
-    return HttpResponse(request)
+        timezone = pytz.timezone('Brazil/East')
+        time = datetime.now(timezone)
+        dados['data'] = time.strftime("%d/%m/%Y")
+        dados['hora'] = time.strftime("%H:%M:%S")
+        collection_data.insert_one(dados)
+        messages.success(request, 'O registro foi salvo!')
+    return redirect('/')
 
 def deleteAllInfo(request):
     collection_data = db_client['AplicacaoData']

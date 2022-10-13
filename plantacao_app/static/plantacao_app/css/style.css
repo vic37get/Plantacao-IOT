@@ -53,7 +53,7 @@ footer {
 }
 
 .box-container {
-  padding: 2.2rem;
+  padding: 0.5rem;
 }
 
 .TextoTituloCardOnOff{
@@ -114,15 +114,14 @@ footer {
 }
 
 .main-logo {
-  font-size: 30px;
+  font-size: 22px;
   color: white;
   text-decoration: none;
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
-  justify-content: center;
   width: fit-content;
   margin: 0 auto;
+  font-weight: 480;
 }
 
 .main-logo-icon {
