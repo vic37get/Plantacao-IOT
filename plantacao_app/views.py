@@ -65,6 +65,6 @@ def saveInfo(request):
 
 def deleteAllInfo(request):
     collection_data = db_client['AplicacaoData']
-    collection_data.remove()
+    collection_data.delete_many({})
     messages.success(request, 'Os registros foram excluídos!')
     return redirect('/')
