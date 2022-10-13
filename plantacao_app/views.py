@@ -1,6 +1,7 @@
 import json
 from datetime import datetime, timezone
 
+import pymongo
 import pytz
 from bdConect import connectMongo
 from django.contrib import messages
@@ -30,12 +31,14 @@ def home(request):
     }
     return HttpResponse(template.render(context, request))
 
-def dashboard(request):
-    dashboard = loader.get_template('plantacao_app/dashboard.html')
+def relatorios(request):
+    template = loader.get_template('plantacao_app/relatorios.html')
+    collection_data = db_client['AplicacaoData']
+    relatorios = collection_data.find().sort("_id", pymongo.DESCENDING)
     context={
-        
+        'relatorios': relatorios
     }
-    return HttpResponse(dashboard.render(context, request))
+    return HttpResponse(template.render(context, request))
 
 @csrf_exempt
 def recebe_informacoes(request):

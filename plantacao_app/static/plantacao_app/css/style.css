@@ -2,7 +2,8 @@
 :root{
     --cor_fundo:rgb(229, 229, 241);
     --primeira_cor_gradiente: #0b790b;
-    --segunda_cor_gradiente: #073305;
+    --corEscura: #0a680a;
+    --corClara: #10ca10;
     --cor_div_clara: #ffffff;
     --cor_bordas: rgb(206, 206, 206);
     --cor_borda_footer: rgb(255, 255, 255);
@@ -23,26 +24,13 @@ html{
 }
 
 body{
-  overflow: auto !important;
   background-image: url(../assets/fundo.jpg) !important;
   background-repeat: repeat;
   background-size: 100% 100%;
-  height: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-footer {
-  z-index: 10;
-  border-top: 1px solid white;
-  background-image: linear-gradient(#18790b, #073305);
-  position: absolute !important;
-  width: 100%;
-  height: fit-content;
-  bottom: 0 !important;
-  left: 0 !important;
-  padding: 0 !important;
-  margin: 0 !important;
+  position: relative;
+  transition: .5s;
+  overflow: auto !important;
+  height: fit-content !important;
 }
 
 .main-header-container {
@@ -56,34 +44,16 @@ footer {
   padding: 0.5rem;
 }
 
-.TextoTituloCardOnOff{
-  height: 3px;
-  background-color: hsl(0, 78%, 62%);
+.cardEscuro{
+  height: 5px;
+  background-color: var(--corEscura);
+  padding: 0;
+  margin: 0;
 }
 
-.TextoTituloCardUmidSolo{
-  height: 3px;
-  background-color: #ff833b9c;
-}
-
-.TextoTituloCardTemp{
-  height: 3px;
-  background-color: #e7d84dbe;
-}
-
-.TextoTituloCardChuva{
-  height: 3px;
-  background-color: #5e54e693;
-}
-
-.TextoTituloCardPrev{
-  height: 3px;
-  background-color: hsl(180, 62%, 55%);
-}
-
-.TextoTituloCardUmidAr{
-  height: 3px;
-  background-color: #31c72c7e;
+.cardClaro{
+  height: 5px;
+  background-color: var(--corClara);
 }
 
 .box_dadosTitulo{
@@ -99,7 +69,6 @@ footer {
 }
 
 .quadro{
-  border: 1px solid var(--cor_bordas);
   text-align: center;
   background-color: var(--cor_div_clara);
   height: 250px;
@@ -118,9 +87,8 @@ footer {
   color: white;
   text-decoration: none;
   display: flex;
-  flex-flow: row nowrap;
   width: fit-content;
-  margin: 0 auto;
+  margin: 0;
   font-weight: 480;
 }
 
@@ -247,3 +215,5 @@ footer {
   .statusoff{
     color: red;
   }
+  
+

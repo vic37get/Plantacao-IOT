@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="main-relatorios">
+    <h3 class="p-3">Relatórios <i class="fa-solid fa-chart-simple"></i></h3>
+    {% for relatorio in relatorios %}
+        <div class="informacoes-relatorio p-3 mb-3 me-3 ms-3">
+            <h6>Leituras obtidas</h6>
+            <div class="relatorio border-dark ps-4 mt-2 mb-2">
+                <p class="pb-0 mb-0"><i class="fa-regular fa-calendar-days"></i> Data: <b>{{relatorio.data}}</b></p>
+                <p class="pb-0 mb-0"><i class="fa-regular fa-clock"></i> Hora: <b>{{relatorio.hora}}</b></p>
+                <p class="pb-0 mb-0"><i class="fa-solid fa-faucet-drip"></i> Irrigação: <b>{{relatorio.status}}</b></p>
+                <p class="pb-0 mb-0"><i class="fa-solid fa-droplet"></i> Umidade do solo: {{relatorio.umidadeSolo}}%</p>
+                <p class="pb-0 mb-0"><i class="fa-solid fa-temperature-three-quarters"></i> Temperatura: {{relatorio.temperatura}}º</p>
+                <p class="pb-0 mb-0"><i class="fa-solid fa-cloud-rain"></i> Chuva: {{relatorio.chuva}}</p>
+                <p class="pb-0 mb-0"><i class="fa-solid fa-wind"></i> Umidade do ar: {{relatorio.umidadeAr}}%</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}

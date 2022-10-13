@@ -24,37 +24,66 @@
         <script src={%static "plantacao_app/js/scripts.js"%} ></script>
         
         <!-- CSS -->
-        <link href={%static "plantacao_app/css/style.css" %} rel="stylesheet" referrerpolicy="origin"></script>
+        <link href={%static "plantacao_app/css/style.css" %} rel="stylesheet" referrerpolicy="origin">
+        <link href={%static "plantacao_app/css/styles.css" %} rel="stylesheet" referrerpolicy="origin">
+        <link href={%static "plantacao_app/css/relatorios.css" %} rel="stylesheet" referrerpolicy="origin">
+        
         <!-- Toggle button -->
         <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
+        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
         <!-- Icones fontaweasome-->
         <script src="https://kit.fontawesome.com/4169326a4c.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
 
-        <!-- Toggle button -->
-        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-
         <title>Plantacao IOT</title>
+
+        <!-- ===== BOX ICONS ===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
     </head>
-        <header class="main-header-container">
-            <div class="main-header box-container">
-                <p class="main-logo" href="/">
-                        <span><i class="fa-solid fa-leaf"></i> Plantação IOT</span>
-                </p>
+
+    <body id="body-pd">
+        <header class="header" id="header">
+            <div class="header__toggle">
+                <i class='bx bx-menu' id="header-toggle"></i>
             </div>
         </header>
-    <body>
-        <main class="main-content-container m-5">
-        {% block content %}
 
-        {% endblock content %}
-        </main>
+        <div class="l-navbar" id="nav-bar">
+            <nav class="nav">
+                <div>
+                    <a href="{% url 'plantacao_app:index' %}" class="nav__logo">
+                        <i class="fa-solid fa-leaf nav__logo-icon"></i>
+                        <span class="nav__logo-name">Plantação IOT</span>
+                    </a>
+
+                    <div class="nav__list">
+                        <a href="{% url 'plantacao_app:relatorios' %}" class="nav__link">
+                        <i class='bx bx-bar-chart-alt-2 nav__icon' ></i>
+                            <span class="nav__name">Relatórios</span>
+                        </a>
+
+                        <a href="{% url 'plantacao_app:deleteAllInfo' %}" class="nav__link">
+                            <i class='bx bx-trash-alt nav__icon' ></i>
+                            <span class="nav__name">Remover registros</span>
+                        </a>
+                        
+                        <a href="{% url 'plantacao_app:saveInfo' %}" class="nav__link">
+                            <i class='bx bx-save nav__icon' ></i>
+                            <span class="nav__name">Salvar registro</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <main class="main-content-container m-5">
+            {% block content %}
+    
+            {% endblock content %}
+            </main>
+            <script src={%static "plantacao_app/js/main.js"%} ></script>
     </body>
-    <footer>
-        <div class="foot"><i class="fa-solid fa-seedling"></i> &copy; 2022, Plantação IOT</div>
-    </footer>
 
 </html>
