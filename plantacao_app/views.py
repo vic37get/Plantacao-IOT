@@ -12,6 +12,8 @@ from django.views.decorators.csrf import csrf_exempt
 from utils import (temperaturaMaxima, temperaturaMinima, umidadeMaxima,
                    umidadeMinima)
 
+from plantacao_app.manipulation import changeLabel
+
 db_client = connectMongo('PlantacaoIOT')
 
 def home(request):
@@ -49,6 +51,8 @@ def recebe_informacoes(request):
     if len(dados) == 6 and dados['token'] == token:
         json_dados = json.dumps(dados, indent=4)
         json_dados = json.loads(json_dados)
+        json_dados['chuva'] = changeLabel(json_dados['chuva'], '0', 'Chovendo', 'Sem chuva') 
+        json_dados['status'] = changeLabel(json_dados['status'], '1', 'Ligada', 'Desligada')
         del json_dados['token']
         with open('informacoes.json', 'w', encoding=("Utf-8")) as f:
             json.dump(json_dados, f)

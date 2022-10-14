@@ -109,7 +109,6 @@
                 temp = data.responseJSON['temperatura'];
                 chuva = data.responseJSON['chuva'];
                 umidade_ar = data.responseJSON['umidadeAr'];
-
                 /*Temperatura*/
                 showMetricsData(temp, 30, 'temperatura', 'maxima', 'minima')
 
@@ -120,11 +119,9 @@
                 showMetricsData(umidade_ar, 50, 'umidade_ar', 'minima', 'maxima')
 
                 /*Chuva*/
-                showBetterData('chuva', 'Sem chuva', 'Chovendo')
                 showMetricsData(chuva, 1, 'chuva_status', 'statusoff', 'statuson')
 
                 /*Status*/
-                showBetterData('status', 'Ligado', 'Desligado')
                 showMetricsData(status, 1, 'status_torneira', 'statuson', 'statusoff')
             },
         });
