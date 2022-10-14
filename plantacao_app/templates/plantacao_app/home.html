@@ -9,8 +9,6 @@
         }
     }, 2000)
 </script>
-
-<div class="main-content main-content-list row-cols-1 justify-content-center mt-5">
     <div class="col quadro">
         <div class="cardEscuro"></div>
         <div class="box_dadosTitulo">
@@ -35,10 +33,10 @@
     <div class="col quadro">
         <div class="cardClaro"></div>
         <div class="box_dadosTitulo">
-            <i class="fa-solid fa-droplet"></i> Umidade do solo
+            <i class="fa-solid fa-droplet text-primary"></i> Umidade do solo
         </div>
         <div class="box_dadosConteudo">
-            <p class="dados_previsao">Umidade do solo: <span id="umidadeSolo"><i class="fa-solid fa-droplet"></i> <span
+            <p class="dados_previsao">Umidade do solo: <span id="umidadeSolo"><span
                         id='umidade_solo'>{{umidade_solo}}</span>%</i></span></p>
         </div>
     </div>
@@ -46,11 +44,10 @@
     <div id='ff' class="col quadro">
         <div class="cardEscuro"></div>
         <div class="box_dadosTitulo">
-            <i class="fa-solid fa-temperature-three-quarters"></i> Temperatura<br>
+            <i class="fa-solid fa-temperature-three-quarters text-danger"></i> Temperatura<br>
         </div>
         <div class="box_dadosConteudo">
-            <p class="dados_previsao">Temperatura atual: <span id="temperatura"><i
-                        class="fa-solid fa-temperature-three-quarters"></i> <span id='temperatura_dht11'>
+            <p class="dados_previsao">Temperatura atual: <span id="temperatura"><span id='temperatura_dht11'>
                         {{temperatura_dht11}}</span>º</i></span></p>
         </div>
     </div>
@@ -58,18 +55,17 @@
     <div class="col quadro">
         <div class="cardClaro"></div>
         <div class="box_dadosTitulo">
-            <i class="fa-solid fa-cloud-rain"></i> Chuva
+            <i class="fa-solid fa-cloud-rain text-secondary"></i> Chuva
         </div>
         <div class="box_dadosConteudo">
-            <p class="dados_previsao">Status da chuva: <span id="chuva_status"><i class="fa-solid fa-cloud-rain"></i>
-                    <span id="chuva">{{chuva}}</span></span></p>
+            <p class="dados_previsao">Status da chuva: <span id="chuva_status"><span id="chuva">{{chuva}}</span></span></p>
         </div>
     </div>
 
     <div class="col quadro">
         <div class="cardEscuro"></div>
         <div class="box_dadosTitulo">
-            <i class="fa-solid fa-cloud-sun"></i> Previsão do tempo
+            <i class="fa-solid fa-sun text-warning"></i> Previsão do tempo
         </div>
         <div class="box_dadosConteudo">
             <p class="dados_previsao">Temperatura: <i class="minima"><i class="fa-solid fa-temperature-arrow-down"></i>
@@ -84,10 +80,10 @@
     <div class="col quadro">
         <div class="cardClaro"></div>
         <div class="box_dadosTitulo">
-            <i class="fa-solid fa-wind"></i> Umidade do ar
+            <i class="fa-solid fa-wind text-info"></i> Umidade do ar
         </div>
         <div class="box_dadosConteudo">
-            <p class="dados_previsao">Umidade atual: <span id="umidade_ar"><i class="fa-solid fa-wind"></i> <span
+            <p class="dados_previsao">Umidade atual: <span id="umidade_ar"><span
                         id="umidadeAr"> {{umidade_dht11}}</span>%</i></span></p>
         </div>
     </div>
