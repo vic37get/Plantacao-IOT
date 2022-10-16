@@ -89,15 +89,14 @@
     </div>
 </div>
 <script>
-    function get_fb() {
-        var content = '';
+    function GetDados() {
         $.ajax({
             type: 'POST',
             url: '/results',
             contentType: 'application/json; charset=utf-8',
             cache: false,
             complete: function (data) {
-                setTimeout(function () { get_fb(); }, 2000);
+                setTimeout(function () { GetDados(); }, 3000);
                 document.getElementById('status').innerHTML = data.responseJSON['status'];
                 document.getElementById('umidade_solo').innerHTML = data.responseJSON['umidadeSolo'];
                 document.getElementById('temperatura_dht11').innerHTML = data.responseJSON['temperatura'];
@@ -119,26 +118,13 @@
                 showMetricsData(umidade_ar, 50, 'umidade_ar', 'minima', 'maxima')
 
                 /*Chuva*/
-                showMetricsData(chuva, 1, 'chuva_status', 'statusoff', 'statuson')
+                showMetricsDataForTerm(chuva, 'Sem chuva', 'chuva_status', 'statusoff', 'statuson')
 
                 /*Status*/
-                showMetricsData(status, 1, 'status_torneira', 'statuson', 'statusoff')
+                showMetricsDataForTerm(status, 'Ligada', 'status_torneira', 'statuson', 'statusoff')
             },
         });
     }
-    get_fb();
-    function SaveData() {
-        var content = '';
-        $.ajax({
-            type: 'POST',
-            url: '/saveInfo',
-            contentType: 'application/json; charset=utf-8',
-            cache: false,
-            complete: function (data) {
-                setTimeout(function () { SaveData(); }, 3600000);
-            },
-        });
-    }
-    SaveData();   
+    GetDados();   
 </script>
 {% endblock content %}
