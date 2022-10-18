@@ -6,25 +6,27 @@
 #include <WiFi.h> // Biblioteca de WiFi
 #include <HTTPClient.h> // Biblioteca de HTTP
 
-#define LED_ON 19
+#define LED 4
 
-#define CHUVAPIN 21
+#define CHUVAPIN 19
 
 DHT dht(DHTPIN, DHTTYPE);
 
-const char* ssid = "ERRO"; //login WiFi
-const char* password = "20199030779"; //senha WiFi
+const char* ssid = "loginWiFi"; //login WiFi
+const char* password = "senhaWiFi"; //senha WiFi
 
 int chuva = 0;
+float umidade = 0;
+float temperatura = 0;
 
-String statusIrrigacao = "1";
+int statusIrrigacao = 0;
 
 void setup() {
   Serial.begin(115200);
 
   pinMode(CHUVAPIN, INPUT);
-  pinMode(LED_ON, OUTPUT);
-//  pinMode(LED_OFF, OUTPUT);
+  pinMode(LED, OUTPUT);
+
   
   dht.begin(); //inicializaçao do sensor DHT
 
@@ -35,50 +37,51 @@ void setup() {
     delay(1000);
     Serial.println("...");
   }
-
-  ligaLed(LED_ON);
   Serial.println("Conectado a rede WiFi!");
   Serial.println("-------------------------------------------------------------");
 }
 
 void loop() {
-
+  //obtem o valor do sensor de chuva
   chuva = digitalRead(CHUVAPIN);
   
   //obtem valores de umidade e temperatura
-  float umidade = dht.readHumidity();
-  float temperatura = dht.readTemperature();
+  umidade = dht.readHumidity();
+  temperatura = dht.readTemperature();
 
   if (isnan(temperatura) || isnan(umidade)){ //verifica se o valor de DHT é válido
     Serial.println("Esperando um valor valido...");
   }else{
     imprimeDht(umidade, temperatura);
     imprimeSensorChuva(chuva);
-    if(WiFi.status()==WL_CONNECTED){ //Verifica se o WiFi está conectado
-      realizaRequisicaoPost(umidade, temperatura, chuva);
+
+    if(umidade<40 || temperatura<10 || chuva==0){
+      statusIrrigacao = 0; 
+      digitalWrite(LED, LOW);
     }else{
-      desligaLed(LED_ON);
+      statusIrrigacao = 1;
+      digitalWrite(LED, HIGH);
+    }
+    
+    if(WiFi.status()==WL_CONNECTED){ //Verifica se o WiFi está conectado
+      realizaRequisicaoPost(umidade, temperatura, chuva, statusIrrigacao);
+    }else{
       Serial.println("Erro na conexão WiFi :(");   
     }
   }
   delay(10000);  //Aguarda 10 segundos  
 }
 
-
-//void piscaLed(){
-//    digitalWrite(LED_OFF, HIGH);
-//    delay(1000);
-//    digitalWrite(LED_OFF, LOW);
-//    delay(1000);
+//void irrigacao(){
+//  if(statusIrrigacao == 1){
+//    digitalWrite(LED, HIGH);
+//  }else if(statusIrrigacao == 0){
+//    digitalWrite(LED, LOW);
+//  }
 //}
 
-void desligaLed(int led){
-  digitalWrite(led, LOW);
-}
 
-void ligaLed(int led){
-  digitalWrite(led, HIGH);
-}
+
 
 void imprimeDht(float umidade, float temperatura){
     Serial.print("Temperatura: ");
@@ -94,12 +97,13 @@ void imprimeSensorChuva(int sensorChuva){
   Serial.println(sensorChuva);
 }
 
-void realizaRequisicaoPost(float umidade, float temperatura, int sensorChuva){
+void realizaRequisicaoPost(float umidade, float temperatura, int sensorChuva, int statusIrrigacao){
    HTTPClient http;   
    String urlPrincipal = "https://plantacao.herokuapp.com/info?";
-   String url = urlPrincipal + "temperatura=" + (String)temperatura+ "&chuva="+(String)sensorChuva+ "&status="+ statusIrrigacao + "&umidadeAr=" +(String)umidade + "&umidadeSolo=80";
+   String token = "35287412";
+   String url = urlPrincipal + "temperatura=" + (String)temperatura+ "&chuva="+(String)sensorChuva+ "&status="+ (String)statusIrrigacao + "&umidadeAr=" +(String)umidade + "&umidadeSolo=80"+"&token="+(String)token;
 
-    Serial.println(url);
+   Serial.println(url);
    
    http.begin(url);  //Especifica rota de requisicao
    http.addHeader("Content-Type", "multipart/form-data"); //Especifica o cabecalho
