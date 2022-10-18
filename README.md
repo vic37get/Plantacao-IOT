@@ -33,7 +33,13 @@ git clone https://github.com/jhoisz/monitoramento-de-plantacao-com-esp8266
 ```
 Para que o ESP8266 possa ser compilado pelo Arduino IDE, é necessário configurar, você pode acessar o [tutorial](https://www.blogdarobotica.com/2020/05/28/como-programar-a-placa-nodemcu-esp8266-no-arduino-ide/) e realizar esse procedimento.
 
-Em seguida entrar na pasta do projeto, abrir o projeto com a IDE Arduino, configurar o WiFi a qual deseja conectar o seu dispositivo, compilar e executar o projeto.
+Em seguida entre na pasta do projeto, abra o projeto com a IDE Arduino e configure o WiFi a qual deseja conectar o seu dispositivo:
+
+```ino
+const char* ssid = "loginWiFi"; //login WiFi
+const char* password = "senhaWiFi"; //senha WiFi
+```
+Após isso, apenas conecte seu dispositivo ESP8266 pela USB, selecione a porta COM correta, compile e execute o projeto.
 
 ## ✨ Protótipo e funcionalidades do projeto
 
